@@ -1,0 +1,35 @@
+<div class="invoice">
+  <h1>Invoice </h1>
+  <h5>To: <%= order.user.first_name %> <%= order.user.last_name %><br><br>
+    Date:<%= Time.now.strftime("%d/%m/%Y") %><br><br>
+    From:Saphiya Restaurant behind c21 mall indore,<br>Phone no:0751-2442568
+  </h5>
+  <p align = 'center'>
+    <table>
+      <tr>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Cost</th>
+      </tr>
+      <% order.cart_items.each do |cartitem| %>
+        <tr>
+          <td><%= cartitem.food_item.name %></td>
+          <td><%= cartitem.quantity %></td> 
+          <td><%= cartitem.food_item.price %></td>
+          <td><%= cartitem.food_item.price*cartitem.quantity %>
+        </tr>
+      <% end %>
+    </table>
+  </p>
+  <div class="amnt">
+    <label>
+      <b>Amount</b>
+      <%amount=0%>
+      <% order.cart_items.each do |cartitem|%>
+        <% amount=amount+cartitem.food_item.price*cartitem.quantity %>
+      <%end%>
+      <b> <%=amount%></b>
+    </label>
+  </div>
+</div>

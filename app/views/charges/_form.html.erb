@@ -1,0 +1,51 @@
+  <!-- breadcrumb start-->
+<section class="breadcrumb breadcrumb_bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb_iner text-center">
+          <div class="breadcrumb_iner_item">
+            <h2>Payment</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  <!-- breadcrumb end -->
+  
+  <!-- ================ payment section start ================= -->
+<section class="contact-section section_padding">
+  <div class="container">   
+    <div class="row">
+      <div class="col-12">
+        <h2 class="contact-title">Payment Details</h2>
+      </div>
+      <div class="col-lg-8">
+        <%= form_for :payment , url: charges_path, html: {class: 'payment_form', id: 'paymentForm'}, remote: true do |f| %>
+          <div class="form-group">
+            <%= f.text_field :Card, autofocus: true, autocomplete: "Card",placeholder: "Card Number", class: 'form-control cardField', id: 'card' %>
+          </div>
+          <div class="form-group">
+            <%= f.text_field :Expiry_month, autofocus: true, autocomplete: "Expiry_month",placeholder: "Exp_month/MM", class: 'form-control monthField', id: 'month' %>
+          </div>
+          <div class="form-group">
+            <%= f.text_field :Expiry_year, autofocus: true, autocomplete: "Expiry_year",placeholder: "Exp_year/YYYY", class: 'form-control yearField', id: 'year' %>
+          </div>
+          <div class="form-group">
+            <%= f.text_field :security, autofocus: true, autocomplete: "security",placeholder: "CVC", class: 'form-control securityField', id: 'secrurity' %>
+          </div>
+          <div class="form-group">
+            <%=f.text_field :amount, placeholder: "Amount", value: @amount,class: 'form-control' %><br>
+          </div>
+          <div class="form-group mt-3">
+            <div class="actions">
+              <button type="submit" class="button button-contactForm btn_4">Submit</button>
+            </div>
+          </div>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ================ Payment section end ================= -->

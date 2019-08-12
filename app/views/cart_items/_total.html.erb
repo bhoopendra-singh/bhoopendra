@@ -1,0 +1,8 @@
+<% if @offer.present?%>
+  <label>Total</label>
+  <%=calculate_amount%><br>
+  <label>Discount</label>
+  <%=@offer.max_discount%><br>
+  <label>Grand Total</label>
+  <%=calculate_amount-@offer.max_discount%>
+<%end%>

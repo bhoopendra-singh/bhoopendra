@@ -1,0 +1,20 @@
+<div class="invoice">
+  <h1>Invoice</h1>
+  <h5>To: <%= subscription.user.first_name %> <%= subscription.user.last_name %><br><br>
+    Date:<%= Time.now.strftime("%d/%m/%Y") %><br><br>
+    From:Saphiya Restaurant behind c21 mall indore,<br>Phone no:0751-2442568
+  </h5>
+    <table>
+      <tr>
+        <th>Description</th>
+        <th>Price</th>
+      </tr>
+      <tr>
+      <td><%= subscription.plan.plan_name%></td>
+      <td><%= subscription.plan.price%></td>
+      </tr>
+    </table>
+    <h3><b>Amount</b>
+    <%=subscription.plan.price%>
+  </h3>
+</div>

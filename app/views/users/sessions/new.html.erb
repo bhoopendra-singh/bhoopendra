@@ -1,0 +1,49 @@
+  <!-- breadcrumb start-->
+<section class="breadcrumb breadcrumb_bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb_iner text-center">
+          <div class="breadcrumb_iner_item">
+            <h2>Log in</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  <!-- breadcrumb end -->
+  
+  <!-- login form start -->
+<section class="contact-section section_padding">
+  <div class="container">   
+    <div class="row">
+      <div class="col-12">
+        <h2 class="contact-title"> Log In</h2>
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'form-contact contact_form', id: 'loginForm'}) do |f| %>
+        <div class="form-group">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder: " Email", class: 'form-control emailField', id: 'email', required: true %>
+        </div>
+        <div class="form-group">
+          <%= f.password_field :password, autocomplete: "current-password",placeholder: "Password", class: 'form-control passwordField', id: 'password'%>
+        </div>
+        <% if devise_mapping.rememberable? -%>
+          <div class="field">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <%end%>
+        <div class="form-group mt-3">
+          <div class="actions">
+            <button type="submit" class="button button-contactForm btn_4">Log in</button>
+          </div>
+        </div>
+      <%end%>
+      <%= render "users/shared/links" %>
+    </div>
+  </div>
+</section>
+  <!-- login form end -->

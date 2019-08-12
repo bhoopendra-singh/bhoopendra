@@ -1,0 +1,71 @@
+<%#= form_for :payment , url: create_subscription_path do |f| %>
+  <%#=f.text_field :Card, placeholder: "Enter card number"%><br>
+  <%#=f.text_field :Expiry_month, placeholder: "Expiry_month/MM"%><br>
+  <%#=f.text_field :Expiry_year, placeholder: "Expiry_year/YY"%><br>
+  <%#=f.text_field :security, placeholder: "CVC"%><br>
+  <%# #plan = Plan.find_by plan_name: 'Monthly Thali'%>
+  <%#= f.hidden_field :plan_id, :value => plan.id %> 
+  
+  <%#=f.submit "Payment of subscrition"%>
+<%#end%>
+<section class="breadcrumb breadcrumb_bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb_iner text-center">
+          <div class="breadcrumb_iner_item">
+            <h2>Payment For Subscription</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  <!-- breadcrumb start-->
+
+  <!-- ================ payment section start ================= -->
+<section class="contact-section section_padding">
+  <div class="container">   
+    <div class="row">
+      <div class="col-12">
+        <h2 class="contact-title">Payment Details</h2>
+      </div>
+      <div class="col-lg-8">
+        <%= form_for :payment , url: create_subscription_path, class: "form-contact contact_form", id: "contactForm", remote: true do |f| %>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <%= f.text_field :Card, placeholder: "Enter card number" %><br>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <%=f.text_field :Expiry_month, placeholder: "Expiry_month/MM"%><br>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <%=f.text_field :Expiry_year, placeholder: "Expiry_year/YY"%><br>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <%=f.text_field :security, placeholder: "CVC"%><br>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+               <% plan = Plan.find_by plan_name: 'Monthly Thali'%>
+               <%= f.hidden_field :plan_id, :value => plan.id %> 
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <%=f.submit "Done!"%>
+          </div>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ================ Payment section end ================= -->

@@ -1,0 +1,4 @@
+<%= form_for @cart_item do |cartitem| %>
+  <%= cartitem.text_field :quantity %><br>
+  <%= cartitem.submit "Update" %>
+<% end %>

@@ -1,0 +1,182 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require font-awesome
+
+ *= require css/all
+ *= require css/animate
+ *= require css/aos
+ *= require css/bootstrap.min
+ *= require css/flaticon
+ *= require css/gijgo.min
+ *= require css/magnific-popup
+ *= require css/nice-select
+ *= require css/owl.carousel.min
+ *= require css/slick
+ *= require css/style
+ *= require css/swiper.min
+ *= require css/themify-icons
+ */
+ @import "bootstrap";
+ @import 'datatables';
+ .invoice {
+  width: 700px;
+  max-width: 700px;
+  border: 2px solid black;
+  margin: 50px;
+  padding: 50px;
+ }
+
+@import "datatables";
+.blink_img {
+  animation: blinker 1s linear infinite;
+  color: red;
+}
+.details{
+  color: olive;
+  font-style: italic;
+  font-style: bold;
+  font-size: 20px;
+}
+@keyframes blinker { 
+  50% { opacity: 0; }
+}
+@keyframes blin { 
+  50% { opacity: 0; }
+}
+.amnt{
+  margin: 15px 188px 35px 200px !important;
+  font-style: bold;
+  text-align: right;
+}
+.offeramnt{
+  margin: 15px 172px 35px 200px !important;
+  font-style: bold;
+  text-align: right;
+}
+.offer{
+  font-style: italic;
+  font-style: bold;
+  font-size: 20px;
+  text-align: center;
+}
+
+
+#myform {
+    text-align: center;
+    padding: 5px;
+    border: 1px dotted #ccc;
+    margin: 2%;
+}
+.qty {
+    width: calc(20% - 22px) !important;
+    height: 25px;
+    text-align: center;
+}
+input.qtyplus { width:25px; height:25px;}
+input.qtyminus { width:25px; height:25px;}
+.padding-table-columns td
+{
+    padding:0 15px 0 15px;
+}
+.total{
+  margin: 15px 172px 35px 200px !important;
+  font-style: bold;
+  text-align: right;
+  }
+.menu{
+  margin-right: 8px;
+  text-align: right;
+}
+
+.total1{
+  margin: 46px 190px 10px 200px !important;
+  font-style: bold;
+  text-align: right;
+  }
+.footer{
+  text-align: center;
+  color: #007bff;
+}
+h5 {
+    text-align: left;
+    margin-bottom: 100px;
+    font-style: italic;
+    font-style: bold;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-style: italic;
+    font-style: bold;
+  }
+  .notes {
+    margin-top: 100px;
+  }
+ 
+  table {
+    width: 90%;
+    text-align: left;
+  }
+  th {
+    padding-bottom: 15px;
+   
+  }
+.left{
+  text-align: left;
+}
+.right{
+  text-align: right;
+  margin-left:10px;
+}
+
+.margin{
+  margin: 1px 26px 45px;
+}
+.header{
+  margin-left: 10px;
+}
+.linkcolor{
+color: #ff6426; 
+}
+.headerlinkcenter{
+  margin-top: 20px;
+}
+
+.iconcolor{
+  color: black;
+}
+.left {
+float: left;
+width: 48%;
+margin: 0 1%;
+}
+
+.btn_11 {
+  padding: 8.5px 18px;
+  border-radius: 50px;
+  background-color: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  color: #ff6426;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  text-transform: capitalize;
+}
+
+.btn_11:hover {
+  color: #fff!important;
+  text-decoration: none;
+  background-color: #ff6426;
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ofos</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all'%>
+    <%= javascript_include_tag 'application'%>
+  </head>
+  <body>
+    <%= render 'layouts/header'%>
+      <div class="container-fluid">
+        <% if notice.present? %>
+        <div class="alert alert-success" role="alert">
+          <strong>Success!</strong> <%= notice %>
+        </div>
+        <% end %>
+        <% if alert.present? %>
+          <div class="alert alert-danger" role="alert">
+            <strong>Oh snap!</strong> <%= alert %>
+          </div>
+        <% end %>
+        <%= yield %>
+      </div>
+    <%= render 'layouts/footer'%>
+  </body>
+</html>
+<script type="text/javascript">
+  setTimeout(function() {
+    $('.alert').hide('slow').delay(1000)
+  }, 2000);
+</script>

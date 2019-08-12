@@ -1,0 +1,182 @@
+ <!-- breadcrumb start -->
+<section class="breadcrumb breadcrumb_bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb_iner text-center">
+          <div class="breadcrumb_iner_item">
+            <h2>Food Menu</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ <!-- breadcrumb end -->
+
+  <!-- modal part start -->
+<%if current_user.cart.cart_items.unpaid.present?%>
+  <div id="modal-window" class="modal hide fade" data-keyboard="false" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="myModalLabel">Your Cart Having items
+          Do You Want To</h5>
+        </div>
+        <div class="modal-body">
+          <p text-color="olive">
+            <i>
+              <%= link_to "Continue", cart_path(current_user.cart.id),:class => "btn_11" %>
+              <%= link_to "Clear All", delete_all_cart_items_path, data: {:confirm => 'Are you sure?'}, :method => :delete,:class => "btn_11" %>
+            </i>
+          </p>
+        </div> 
+      </div>
+    </div>
+  </div> 
+<%end%>
+  <!-- modal part end -->
+
+  <!--::menu_part start::-->
+<section class="chefs_part blog_item_section section_padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-5">
+        <div class="section_tittle">
+          <h2>Menu List Items</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <% @categories.where.not(name:'Monthly Thali').each do |category| %>
+        <% if category.food_items.present? %>
+          <%  category.food_items .each do |food_item| %>
+            <div class="col-sm-6 col-lg-4">
+              <div class="single_blog_item">
+                <div class="single_blog_img">
+                  <%= image_tag food_item.photo.url, :size => "350x200" %>
+                </div>
+                <div class="single_blog_text text-center">
+                  <h3><%=food_item.name%></h3>
+                  <p><%=food_item.price%></p>
+                  <%if current_user.present? %> 
+                    <%if current_user.cart.present? &&current_user.cart.cart_items.unpaid.map(&:food_item_id).include?(food_item.id)%>
+                      Added
+                    <%else%>
+                      <%= form_for :cart_item,:url => add_to_cart_path  do |cart_item| %>
+                        <button type="button" class="
+                        add-quantity"><i class="fas fa-minus"></i></button>
+                        <%= cart_item.text_field :quantity,class: 'qty', value: food_item_quantity(food_item.id) %>
+                        <button type="button" class="add-quantity"><i class="fas fa-plus"></i></button>
+                        <%= cart_item.hidden_field :food_item_id, :value => food_item.id %>
+                        <button type="submit" class="add-button"><i class="fas fa-shopping-cart"></i></button>
+                      <%end%>
+                    <%end%> 
+                  <%else%>
+                    <%= form_for :cart_item,:url => add_to_cart_path  do |cart_item| %>
+                      <button type="button" class="
+                      add-quantity"><i class="fas fa-minus"></i></button>
+                      <%= cart_item.text_field :quantity,class: 'qty', value: food_item_quantity(food_item.id) %>
+                      <button type="button" class="add-quantity"><i class="fas fa-plus"></i></button>
+                      <%= cart_item.hidden_field :food_item_id, :value => food_item.id %>
+                      <button type="submit" class="add-button"><i class="fas fa-shopping-cart"></i></button>
+                    <%end%>
+                  <%end%>
+                </div>
+              </div>
+            </div> 
+          <%end%>
+        <%end%>
+      <%end%>
+      <% @categories.where(name:'Monthly Thali').each do |category| %>
+        <% if category.food_items.present? %>
+          <%  category.food_items .each do |food_item| %>
+            <div class="col-sm-6 col-lg-4">
+              <div class="single_blog_item">
+                <div class="single_blog_img">
+                  <%= image_tag food_item.photo.url, :size => "350x200" %>
+                </div>
+                <div class="single_blog_text text-center">
+                  <h3><%=food_item.name%></h3>
+                  <p><%=food_item.price%></p>
+                  <%if current_user.present? %> 
+                    <%=link_to  subscription_path do %>
+                      <i class="fas fa-shopping-cart" style="color:black"></i>
+                    <%end%>
+                  <%end%>
+                </div>
+              </div>
+            </div> 
+          <%end%>
+        <%end%>
+      <%end%>
+    </div>
+  </div> 
+</section>
+  <!--::menu_part end::-->
+<%if session[:items] == "true"%>  
+  <script>
+    $(document).ready(function(){
+      debugger
+      $('#modal-window').modal('show');
+      $('.btn_11').click(function(e){
+        session[:items] = "false"
+      });
+      $(".qty").each(function(index, value) {
+        value = parseInt(value["value"])
+        if(value>0){
+          $('.add-button').show();
+        }else{
+         $('.add-button').hide(); 
+        }
+      });
+      $('.add-quantity').click(function(e){
+        e.preventDefault();
+        var element = $(this).siblings('.qty')
+        if($(this).attr('class') == 'add-quantity'){
+          $(element).val(parseInt(element.val()) + 1);  
+        }else{
+          if($(element).val() > 0){
+           $(element).val(parseInt(element.val()) - 1);
+         }
+        }
+        var button = $(this).siblings('.add-button')
+        if(parseInt(element.val())>0){
+          $(button).show();
+        }else{
+          $(button).hide();
+        }
+      });
+    });
+  </script>
+<%else%>
+  <script>
+    $(document).ready(function(){
+      $(".qty").each(function(index, value) {
+        value = parseInt(value["value"])
+        if(value>0){
+          $('.add-button').show();
+        }else{
+         $('.add-button').hide(); 
+        }
+      });
+      $('.add-quantity').click(function(e){
+        e.preventDefault();
+        var element = $(this).siblings('.qty')
+        if($(this).attr('class') == 'add-quantity'){
+          $(element).val(parseInt(element.val()) + 1);  
+        }else{
+          if($(element).val() > 0){
+           $(element).val(parseInt(element.val()) - 1);
+         }
+        }
+        var button = $(this).siblings('.add-button')
+        if(parseInt(element.val())>0){
+          $(button).show();
+        }else{
+          $(button).hide();
+        }
+      });
+    });
+  </script>
+<%end%>

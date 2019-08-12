@@ -1,0 +1,50 @@
+  <!-- breadcrumb start-->
+<section class="breadcrumb breadcrumb_bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb_iner text-center">
+          <div class="breadcrumb_iner_item">
+            <h2>Offers</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  <!-- breadcrumb end-->
+    
+  <!--::offers_part start::-->
+  <section class="chefs_part blog_item_section section_padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-5">
+          <div class="section_tittle">
+            <h2>Our Recent Offers</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <% @offers.each do |offer| %>
+          <div class="col-sm-6 col-lg-4">
+            <div class="single_blog_item">
+              <div class="single_blog_img">
+                <%= image_tag("offer2.png", :alt => "offer2 feed") %>
+              </div>
+              <div class="single_blog_text text-center">
+                <h3><%= offer.title %></h3>
+                <p><%= "#{offer.max_discount} %OFF" %></p>
+                <div class="banner_btn">
+                  <div class="banner_btn_iner">
+                    <a href="<%= offer_path(offer.id) %>" class="btn_3">Pick Offer <%= image_tag("icon/left_1.svg", :alt => "left_1 feed") %>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+        <%end%>
+      </div>
+    </div>
+  </section>
+  <!--::offers_part end::-->

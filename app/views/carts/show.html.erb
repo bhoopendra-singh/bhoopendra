@@ -1,0 +1,143 @@
+<section class="breadcrumb breadcrumb_bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb_iner text-center">
+          <div class="breadcrumb_iner_item">
+            <h2>Cart</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="payment">
+  <div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-8">
+      <div class="invoice">
+        <%if @offer.present?%>
+          <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="myModalLabel"><%=@offer.title%></h4>
+                  <button type="button" class="close" data-dismiss="modal">x</button>
+                </div>
+                <div class="modal-body">
+                  <p text-color="olive">
+                    <i>
+                      This offer will be applicable from
+                      <%=@offer.start_time.strftime("%d/%m/%Y")%> To <%=@offer.end_time.strftime("%d/%m/%Y")%> You can get maximum discount <%=@offer.max_discount%> rupees at  minimum purchased <%=@offer.min_purchase%> rupees 
+                    </i>
+                  </p>
+                </div> 
+              </div>
+            </div>
+          </div> 
+          <% if @unpaid_cart_items.present? %>
+            <table id="cart">
+              <tbody class="item">
+                <% @unpaid_cart_items.each do |cartitem| %>
+                  <tr>
+                    <td><%= cartitem.food_item.name%></td> 
+                    <td><%= cartitem.food_item.price%> X <%=cartitem.quantity %></td>
+                    <td><%=cartitem.food_item.price*cartitem.quantity%></td>
+                    <td>
+                      <%= link_to  cart_item_path(cartitem,offer: @offer.id),
+                      title: "Delete Record",data: {:confirm => 'Are you sure?'}, :method => :delete,remote: true,:class => "iconcolor" do %>
+                       <i class="fa fa-trash" aria-hidden="true"></i>
+                      <%end%>
+                    </td>
+                  </tr>
+                <%end%>
+              </tbody>
+            </table>
+            <div class="total">
+              <%granttotal=0%>
+              <%if calculate_amount >= @offer.min_purchase %>
+                <label>Total</label>
+                <i class="fa fa-inr" aria-hidden="true"></i>
+                <%=calculate_amount%><br>
+                <label>Discount</label>
+                <i class="fa fa-inr" aria-hidden="true"></i>
+                <%=@offer.max_discount%><br>
+                <label>Pay Amount</label>
+                <i class="fa fa-inr" aria-hidden="true"></i>
+                <%=granttotal = calculate_amount-@offer.max_discount%><br>
+                <%= link_to  new_charge_path(amount: granttotal,offer: @offer.id),title: "Pay To Money",:class => "btn_1 d-none d-sm-block" do %>
+                <i class="fa fa-inr" aria-hidden="true"></i>Pay To Proceed
+                <%end%><%= link_to "Back",offer_path(@offer),:class => "btn_1 d-none d-sm-block" %>
+              <%else%>
+                <label>Total</label>
+                <i class="fa fa-inr" aria-hidden="true"></i>
+                <%=amount = calculate_amount%><br>
+                <%= link_to  new_charge_path,title: "Pay To Money",:class => "btn_1 d-none d-sm-block" do %>
+                <i class="fa fa-inr" aria-hidden="true"></i>Pay To Proceed
+                <%end%>|<%= link_to "Back",offer_path(@offer),:class => "btn_1 d-none d-sm-block"%>
+              <%end%>
+            </div>
+          <%end%>
+        <%else%>
+          <% if @unpaid_cart_items.present? %>
+            <table>
+              <tbody>
+                <% @unpaid_cart_items.each do |cartitem| %>
+                  <tr>
+                    <td><%= cartitem.food_item.name%></td> 
+                    <td><%= cartitem.food_item.price%> X <%=cartitem.quantity %></td>
+                    <td><%=cartitem.food_item.price*cartitem.quantity%></td>
+                    <td><%= link_to  edit_cart_item_path(cartitem),title: "Edit Record",:class => "iconcolor" do%>
+                      <i class="fa fa-pencil" aria-hidden="true"></i>
+                    <%end%>
+                  </td>
+                  <td>
+                    <%= link_to  cart_item_path(cartitem),title: "Delete Record",data: {:confirm => 'Are you sure?'}, :method => :delete,:class => "iconcolor" do %>
+                     <i class="fa fa-trash" aria-hidden="true"></i>
+                    <%end%>
+                  </td>
+                  </tr>
+                <%end%>
+              </tbody>
+            </table>
+          <%end%>
+          <div class="total1">
+            <label>Total</label>
+            <i class="fa fa-inr" aria-hidden="true"></i>
+            <%=calculate_amount%><br>
+            <p style="float: left;">
+              <%= link_to "Proceed to pay", new_charge_path,:class => "btn_11" %>
+            </p>
+            <p style="float: right;">
+              <%=link_to "Back",menu_path,:class => "btn_11"%>
+            </p>
+          </div>
+        <%end%>
+      </div>
+    </div>
+    <div class="col-md-2">
+    </div>
+    <%if @offer.present? %> 
+      <div class="col-md-4">
+        <section class="chefs_part blog_item_section section_padding">
+          <div class="container">
+            <div class="single_blog_item">
+              <div class="single_blog_text text-center">
+                <h3><%= @offer.title %></h3>
+                <p><%= "#{@offer.max_discount} %OFF" %></p>
+                <div class="banner_btn">
+                  <div class="banner_btn_iner">
+                    <a>
+                      <%= link_to 'Offer Details', '#', {'data-toggle' =>  "modal", 'data-target' => '#modal-window'}  %>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    <%end%>
+  </div>  
+</div>

@@ -1,0 +1,11 @@
+<% current_user.cart.cart_items.unpaid.each do |cartitem| %>
+  <tr>
+    <td><%= cartitem.food_item.name%></td> 
+    <td><%= cartitem.food_item.price%> X <%=cartitem.quantity %></td>
+    <td><%=cartitem.food_item.price*cartitem.quantity%></td>
+    <td>
+      <%= link_to 'X', cart_item_path(cartitem,offer: @offer.id),
+      title: "Delete Record",data: {:confirm => 'Are you sure?'}, :method => :delete,remote: true %>
+    </td>
+  </tr>
+<%end%>
