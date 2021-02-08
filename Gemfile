@@ -70,7 +70,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #project specific gems
 gem 'activeadmin'
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave', '~> 1.3'
 gem 'mini_magick', '~> 4.3'
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
